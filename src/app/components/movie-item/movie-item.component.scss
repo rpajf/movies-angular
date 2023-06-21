@@ -1,0 +1,18 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+.item {
+  width: 400px;
+  padding: 20px;
+  height: 150px;
+  border: 1px solid rgb(138, 126, 37);
+  list-style-type: none;
+}
+
+.title {
+  font-size: 14px;
+  color: green
+}

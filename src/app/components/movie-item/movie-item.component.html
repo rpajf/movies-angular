@@ -1,0 +1,14 @@
+
+
+
+  <div *ngIf="data" class="dashboard" > <!-- Check if data is loaded -->
+    <!-- <p>{{ data | json }}</p>   -->
+    <!-- Use json pipe to display the data object -->
+    <li *ngFor="let movie of data.results" class="item">
+      <app-movie-single [movie]="movie" ></app-movie-single>
+      <!-- <h3 class="title">{{ data.title }}</h3> -->
+      <!-- <p>Release date: {{ data.release_date }}</p> -->
+      <!-- <p>{{data}}</p> -->
+      <!-- <img src="" alt=""> -->
+    </li>
+  </div>

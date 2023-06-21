@@ -1,0 +1,14 @@
+@import "./variables";
+
+body {
+  background-color: $primary;
+  // color: #fff;
+  width: 1440px;
+  height: 100vh;
+
+  margin: 0 auto;
+}
+p{
+  color: $text-color;
+
+}
