@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from 'src/app/utils/data.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie-item',
@@ -10,21 +10,38 @@ import { Subject, Subscription } from 'rxjs';
 export class MovieItemComponent implements OnInit, OnDestroy {
   data: any; // store the data here
   dataSubscription!: Subscription;
+  isLoading: boolean = false;
+  currentPage: number = 1;
+  itemsPerPage: number = 15;
+  toggleLoading: () => boolean = () => (this.isLoading = !this.isLoading);
+  constructor(
+    private dataService: DataService,
+  ) {}
 
-  constructor(private dataService: DataService) {}
 
-  ngOnInit(): void {
-    this.dataSubscription = this.dataService.getData().subscribe({
-      next: (data) => {
-        console.log('data',data.results)
-        this.data = data;
-      },
-      error: (err) => console.error(err),
-      complete: () => console.log('Data loaded'),
-    });
+  loadData() {
+    this.toggleLoading();
+    this.dataSubscription = this.dataService
+      .getData(this.currentPage)
+      .subscribe({
+        next: (data) => {
+          this.data = {
+            ...this.data,
+            results: [...(this.data?.results || []), ...data.results],
+          };
+        },
+        error: (err) => console.error(err),
+        complete: () => this.toggleLoading(),
+      });
   }
-
+  ngOnInit(): void {
+    this.loadData();
+  }
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();
   }
+  onScroll = () => {
+    this.loadData();
+    this.currentPage++;
+  };
 }

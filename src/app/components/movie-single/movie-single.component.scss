@@ -20,3 +20,11 @@
   color: rgb(138, 126, 37);
 
 }
+
+.search-results {
+  height: 100%;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

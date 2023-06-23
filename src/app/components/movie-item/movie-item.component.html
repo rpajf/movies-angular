@@ -1,14 +1,10 @@
-
-
-
-  <div *ngIf="data" class="dashboard" > <!-- Check if data is loaded -->
-    <!-- <p>{{ data | json }}</p>   -->
-    <!-- Use json pipe to display the data object -->
-    <li *ngFor="let movie of data.results" class="item">
-      <app-movie-single [movie]="movie" ></app-movie-single>
-      <!-- <h3 class="title">{{ data.title }}</h3> -->
-      <!-- <p>Release date: {{ data.release_date }}</p> -->
-      <!-- <p>{{data}}</p> -->
-      <!-- <img src="" alt=""> -->
-    </li>
+<div *ngIf="data" class="search-results" infiniteScroll  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="500"
+  (scrolled)="onScroll()"
+  [scrollWindow]="false"
+>  
+  <div class="data-card" *ngFor="let movie of data.results">
+    <app-movie-single [movie]="movie" ></app-movie-single>
   </div>
+</div>
+<div *ngIf="isLoading">Loading</div>

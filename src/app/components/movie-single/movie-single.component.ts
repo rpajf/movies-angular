@@ -5,9 +5,9 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-interface Movie {
-  title: string;
-  overview: string;
+export interface Movie {
+  title?: string;
+  overview?: string;
   vote_average?: number;
 }
 
